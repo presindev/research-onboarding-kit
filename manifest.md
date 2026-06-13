@@ -24,7 +24,11 @@
 - `reference/reproducibility-policy.md`
 - `reference/research-integrity-policy.md`
 - `reference/session-recovery.md`
+- `scripts/capture_environment.py`
+- `scripts/check_frozen.py`
 - `scripts/update-manifest.sh`
+- `scripts/validate_registry.py`
+- `scripts/validate_structure.py`
 - `skills/research-workflow/SKILL.md`
 - `skills/research-workflow/classification-policy.md`
 - `skills/research-workflow/examples.md`
