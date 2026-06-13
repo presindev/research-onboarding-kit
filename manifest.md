@@ -13,6 +13,14 @@
 - `agents/research-lead.md`
 - `agents/scribe.md`
 - `agents/skeptic.md`
+- `hooks/examples/block-frozen-writes.sh`
+- `hooks/examples/block-unapproved-launch.sh`
+- `hooks/examples/frozen-path-warning.sh`
+- `hooks/examples/post-results-reminder.sh`
+- `hooks/examples/smoke-test-reminder.sh`
+- `hooks/examples/suggest-card.sh`
+- `hooks/hooks-policy.md`
+- `hooks/settings-snippets.md`
 - `manifest.md`
 - `reference/autonomy-policy.md`
 - `reference/compute-budget-policy.md`
