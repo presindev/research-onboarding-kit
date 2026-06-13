@@ -113,6 +113,32 @@ project-specific decisions.</code></pre>
         </ul>
       </section>
 
+      <section id="contributing">
+        <h2>Contributing</h2>
+        <p>Contributions are welcome. To propose a change:</p>
+        <ol>
+          <li>Fork the repository.</li>
+          <li>Create a branch from <code>main</code> with a descriptive name (e.g.
+              <code>fix/hook-path-filter</code> or <code>feat/cluster-ops-htcondor</code>).</li>
+          <li>Make your changes. Keep PRs focused — one concern per PR.</li>
+          <li>Open a pull request against <code>main</code> with a clear description of what it does and why.</li>
+          <li>Wait for review. Only the repository owner merges PRs.</li>
+        </ol>
+        <h3>Guidelines</h3>
+        <ul>
+          <li>Keep all kit files in English (generated project artifacts may use the project's language).</li>
+          <li>Templates under <code>templates/</code> and the optional packs use <code>{{PLACEHOLDER}}</code> syntax.</li>
+          <li>HTML artifacts must share <code>research.css</code> / <code>research.js</code> — do not fork the design system.</li>
+          <li>Hook scripts: POSIX bash, fail open without <code>jq</code>.</li>
+          <li>Validation scripts: cross-platform standard-library Python (POSIX + Windows).</li>
+          <li>Agent files use the <code>name</code>/<code>description</code>/<code>tools</code> frontmatter; keep <code>skeptic</code> and <code>literature-scout</code> read-only.</li>
+          <li>Run <code>scripts/update-manifest.sh</code> after adding/removing files; commit the updated <code>manifest.md</code>.</li>
+          <li>CI must pass (shellcheck, Python byte-compile, stale-reference / placeholder / manifest consistency).</li>
+        </ul>
+        <h3>Reporting issues</h3>
+        <p>Open a GitHub issue with a short description, steps to reproduce (if a bug), and expected vs. actual behavior.</p>
+      </section>
+
       <section id="license">
         <h2>License</h2>
         <p>MIT — see <code>LICENSE</code>.</p>

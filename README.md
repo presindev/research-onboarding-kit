@@ -173,6 +173,45 @@ The onboarding produces a project-specific configuration. It does not copy gener
 rules without adapting them. If a decision is missing, Claude asks. Unknowns become
 explicit TODOs, never invented values.
 
+## Contributing
+
+Contributions are welcome. To propose a change:
+
+1. Fork the repository.
+2. Create a branch from `main` with a descriptive name (e.g. `fix/hook-path-filter`
+   or `feat/cluster-ops-htcondor`).
+3. Make your changes. Keep PRs focused — one concern per PR.
+4. Open a pull request against `main` with a clear description of what the change
+   does and why.
+5. Wait for review. Only the repository owner merges PRs.
+
+### Guidelines
+
+- Keep all kit files in English (generated project artifacts may use the project's
+  language).
+- Template files under `templates/` (and the optional packs) use `{{PLACEHOLDER}}`
+  syntax; keep that convention.
+- HTML artifacts (cards, registry, notebook, reports) must share
+  `research.css` / `research.js` — do not fork the design system.
+- Hook scripts must be POSIX-compatible bash and degrade gracefully (fail open)
+  when `jq` is unavailable.
+- Validation scripts must be cross-platform (standard-library Python, runs on
+  POSIX and Windows).
+- Agent files must follow the frontmatter format (`name`, `description`, `tools`);
+  keep `skeptic` and `literature-scout` read-only.
+- Run `scripts/update-manifest.sh` after adding, renaming, or deleting files, and
+  commit the updated `manifest.md`.
+- CI must pass (shellcheck, Python byte-compile, no stale `.md` artifact
+  references, placeholder-token locations, manifest freshness).
+
+### Reporting issues
+
+Open a GitHub issue with:
+
+- A short description of the bug or request.
+- Steps to reproduce (if a bug).
+- The expected vs. actual behavior.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
