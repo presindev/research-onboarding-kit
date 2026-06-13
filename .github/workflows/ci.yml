@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  shellcheck:
+    name: Shellcheck hook and kit scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run shellcheck
+        run: |
+          # .template scripts contain {{PLACEHOLDER}} tokens and are not valid bash yet.
+          files=$(find hooks scripts -name '*.sh' -not -name '*.template' 2>/dev/null || true)
+          if [ -z "$files" ]; then echo "No shell scripts to check yet."; exit 0; fi
+          echo "Checking:"; echo "$files"
+          shellcheck $files
+
+  pycompile:
+    name: Byte-compile Python scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Compile
+        run: |
+          files=$(find scripts -name '*.py' 2>/dev/null || true)
+          if [ -z "$files" ]; then echo "No Python scripts to check yet."; exit 0; fi
+          echo "Compiling:"; echo "$files"
+          python -m py_compile $files
+
+  consistency:
+    name: Reference and placeholder consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: No stale Markdown references to HTML artifacts
+        run: |
+          # The central human-facing artifacts are styled HTML (card.html,
+          # registry.html, NOTEBOOK.html, analysis-report.html). Their .md
+          # names must not reappear anywhere in the kit. (project-map.md and
+          # infra-spec.md are intentionally Markdown and are NOT guarded.)
+          if grep -rn \
+            -e 'experiment-card\.md\b' -e 'analysis-report\.md\b' \
+            -e 'NOTEBOOK\.md\b' -e 'registry\.md\b' -e 'card\.md\b' \
+            --include='*.md' --include='*.sh' --include='*.py' \
+            --include='*.template' --include='*.html' --include='*.json' .; then
+            echo "::error::Stale .md reference found (these artifacts are HTML now)."
+            exit 1
+          fi
+          echo "OK: no stale .md artifact references."
+
+      - name: Placeholder tokens only where expected
+        run: |
+          # {{PLACEHOLDER}} tokens belong in templates/ and *.template files.
+          # A few docs legitimately mention the convention itself.
+          allowlist='^\./(templates/|scripts/[^/]+\.template$|README\.md$|README\.html$|instructions\.md$|skills/research-workflow/experiment-card-format\.md$|scripts/validate_structure\.py$|\.github/)'
+          offenders=$(grep -rl "{{[A-Z0-9_][A-Z0-9_]*}}" . --include='*.md' --include='*.sh' --include='*.py' --include='*.html' --include='*.json' --include='*.template' --include='*.css' --include='*.js' | grep -Ev "$allowlist" || true)
+          if [ -n "$offenders" ]; then
+            echo "::error::Unexpected {{PLACEHOLDER}} tokens in:"
+            echo "$offenders"
+            exit 1
+          fi
+          echo "OK: placeholder tokens only in expected locations."
+
+      - name: manifest.md is up to date
+        run: |
+          bash scripts/update-manifest.sh
+          if ! git diff --exit-code manifest.md; then
+            echo "::error::manifest.md is stale. Run scripts/update-manifest.sh and commit the result."
+            exit 1
+          fi
+          echo "OK: manifest.md matches git ls-files."

@@ -1,2 +1,28 @@
+# Internal development docs — the build-time specification and plan for the
+# kit itself, not part of the shipped harness (mirrors how the sdd-onboarding-kit
+# keeps its own todolist.md / bugs.md / internal specs out of the deliverable).
 PLAN.md
 research-onboarding-kit-blueprint.md
+
+# Maintainer scratch files
+bugs.md
+todolist.md
+
+# Python (the kit ships cross-platform .py validators)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
