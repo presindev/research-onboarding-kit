@@ -6,7 +6,10 @@
 - `.github/pull_request_template.md`
 - `.github/workflows/ci.yml`
 - `.gitignore`
+- `DOCUMENTATION.html`
 - `LICENSE`
+- `README.html`
+- `README.md`
 - `agents/analyst.md`
 - `agents/experiment-designer.md`
 - `agents/literature-scout.md`

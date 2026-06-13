@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Onboarding Kit — README</title>
+  <link rel="stylesheet" href="templates/assets/research.css">
+</head>
+<body>
+<div class="page-wrap">
+  <nav class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">RDD KIT
+        <span>README</span>
+      </div>
+    </div>
+    <p class="sidebar-title">Contents</p>
+    <div id="toc-list"></div>
+  </nav>
+
+  <div class="main-content">
+    <header class="spec-header">
+      <h1>Research Onboarding Kit for Claude Code</h1>
+      <p>Installs a <strong>Research Driven Development (RDD)</strong> harness in any
+         repository — the research-focused sibling of the <code>sdd-onboarding-kit</code>.
+         For full operational docs, open <a href="DOCUMENTATION.html">DOCUMENTATION.html</a>.</p>
+    </header>
+
+    <main>
+      <section id="what-it-is">
+        <h2>What it is</h2>
+        <p>A reusable template that, through an onboarding interview, produces a
+           <strong>project-specific</strong> configuration: <code>CLAUDE.md</code>,
+           <code>PLAN.md</code>, <code>.claude/agents/</code>, <code>.claude/skills/</code>,
+           <code>experiments/</code> (cards + registry), <code>notebook/NOTEBOOK.html</code>,
+           <code>decisions/</code>, and validation scripts. It is not a global configuration.</p>
+        <p>English is canonical for kit files; generated artifacts may use the project's language.</p>
+      </section>
+
+      <section id="experiment-loop">
+        <h2>The experiment loop</h2>
+        <p>RDD replaces the SDD feature-spec loop with the experiment loop, built on the
+           <strong>experiment card</strong>, with two human gates (⛔):</p>
+        <ol class="task-timeline exp-timeline">
+          <li class="task-item draft"><div class="task-item-header"><span class="badge badge-draft">classify + draft</span></div><div class="task-item-body">Classify (infra/experiment/analysis); draft the card — one change under test, baseline, metrics + gate declared before launch.</div></li>
+          <li class="task-item approved"><div class="task-item-header"><span class="badge badge-approved">⛔ approve</span></div><div class="task-item-body">Researcher approves the card. No config/launcher/run before this.</div></li>
+          <li class="task-item launched"><div class="task-item-header"><span class="badge badge-launched">build + launch</span></div><div class="task-item-body">Config + launcher + smoke test (passes locally first). Cheap-local runs Claude may do; cluster runs are handed over and the card waits — no fabricated results.</div></li>
+          <li class="task-item analyzed"><div class="task-item-header"><span class="badge badge-analyzed">analyze</span></div><div class="task-item-body">Verify real results vs the gate; the skeptic tries to refute; every run logged, failures and negatives included.</div></li>
+          <li class="task-item done"><div class="task-item-header"><span class="badge badge-done">⛔ confirm</span></div><div class="task-item-body">Researcher confirms the verdict; scribe updates notebook + registry.</div></li>
+        </ol>
+        <p>The two gates sit where research goes expensively or dishonestly wrong:
+           <strong>launching compute</strong> and <strong>making claims</strong>. Analysis stays friction-free.</p>
+      </section>
+
+      <section id="failure-modes">
+        <h2>Why these mechanisms</h2>
+        <p>Distilled from a real case: ~6 months lost to simultaneous untested changes, a
+           silently corrupted validation set, and checkpoint selection keyed to it.</p>
+        <table>
+          <thead><tr><th>Failure mode</th><th>Countermeasure</th></tr></thead>
+          <tbody>
+            <tr><td>Many simultaneous changes; unattributable</td><td>One change per experiment</td></tr>
+            <tr><td>Eval data silently mutated / leaks</td><td>Frozen-artifact policy + <code>check_frozen.py</code></td></tr>
+            <tr><td>No baseline</td><td>Baseline & reproduction gate first</td></tr>
+            <tr><td>Cherry-picking (p-hacking)</td><td>Every run logged, negatives included</td></tr>
+            <tr><td>Not reproducible later</td><td>Config-as-spec, seeds, env capture, data hashes</td></tr>
+            <tr><td>Compute wasted on bugs</td><td>Smoke test before the queue</td></tr>
+            <tr><td>Claims not traceable</td><td>Claim → card → artifact at write-up</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="install">
+        <h2>How to install</h2>
+        <p>Add this folder to your project, open Claude Code there, and run:</p>
+        <pre><code>Read `research-onboarding-kit/instructions.md` and configure this repository to
+use Research Driven Development. Ask me all necessary questions before making
+project-specific decisions.</code></pre>
+      </section>
+
+      <section id="installed">
+        <h2>What gets installed</h2>
+        <p><strong>By default:</strong> a concise <code>CLAUDE.md</code> + <code>PLAN.md</code>; six agents;
+           the <code>research-workflow</code> skill; <code>experiments/</code> (registry.json + registry.html +
+           the shared design system); <code>notebook/NOTEBOOK.html</code>; <code>decisions/answers.md</code>;
+           the project map; and the cross-platform validation scripts.</p>
+        <p><strong>Optional (opt-in):</strong> ten skill packs (experiment-registry,
+           reproducibility-audit, cluster-ops, literature-watch, paper-trail, data-provenance,
+           decision-log, failure-learning, git-discipline, figure-style); example hooks (disabled
+           by default); paper-search/tracker MCPs. The default install is fully local.</p>
+      </section>
+
+      <section id="artifacts">
+        <h2>Artifacts: styled HTML + machine state</h2>
+        <p>Durable human-facing artifacts (cards, registry dashboard, notebook, analysis reports)
+           are styled, self-contained HTML sharing one design system. Experiment state lives in
+           <code>experiments/registry.json</code> — the validation source of truth, kept separate
+           from the HTML. Operational files (<code>CLAUDE.md</code>, skills, agents, policies) are
+           Markdown; configs and launchers are text.</p>
+        <p>See the rendered reference example at
+           <code>experiments/E001_example-baseline/card.html</code>.</p>
+      </section>
+
+      <section id="safety">
+        <h2>Safety model</h2>
+        <ul>
+          <li>Two human gates Claude never crosses on its own (card approval, verdict confirmation).</li>
+          <li>No expensive/long compute without approval; smoke test before any cluster job.</li>
+          <li>Frozen artifacts never mutate; replacements get new names + a decision.</li>
+          <li>Every run logged; no metric shopping; claims trace to artifacts.</li>
+          <li>No global memory write without explicit approval; no secrets/sensitive data in any layer.</li>
+          <li>Hooks advisory/blocking, never mutating/dangerous, disabled by default; autonomy is read-only monitoring at most.</li>
+        </ul>
+      </section>
+
+      <section id="license">
+        <h2>License</h2>
+        <p>MIT — see <code>LICENSE</code>.</p>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="templates/assets/research.js"></script>
+</body>
+</html>

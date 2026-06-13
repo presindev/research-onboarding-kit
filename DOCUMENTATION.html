@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Onboarding Kit — Documentation</title>
+  <link rel="stylesheet" href="templates/assets/research.css">
+</head>
+<body>
+<div class="page-wrap">
+  <nav class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">RDD KIT
+        <span>documentation</span>
+      </div>
+    </div>
+    <p class="sidebar-title">Contents</p>
+    <div id="toc-list"></div>
+  </nav>
+
+  <div class="main-content">
+    <header class="spec-header">
+      <h1>Research Onboarding Kit — Documentation</h1>
+      <p>Full operational documentation for the Research Driven Development (RDD)
+         harness. Quick start is in <a href="README.html">README.html</a>; deeper
+         theory and policy are in <code>reference/</code>.</p>
+    </header>
+
+    <main>
+      <section id="what-is-rdd">
+        <h2>1. What is RDD</h2>
+        <p>Research Driven Development is the research analog of Spec Driven Development.
+           SDD's central object is the feature spec; RDD's is the <strong>experiment</strong>.
+           Research code fails differently from product code — not by crashing, but by
+           producing a number that is wrong in a way that looks right. RDD structures work so
+           that the honest, reproducible path is the cheapest one. See
+           <code>reference/rdd-theory.md</code>.</p>
+      </section>
+
+      <section id="what-this-kit-is">
+        <h2>2. What this kit is</h2>
+        <p>A reusable template that, through an onboarding interview, produces a
+           project-specific configuration. It is local-first, human-gated, and
+           artifact-centric. It never copies generic rules without adapting them; missing
+           decisions are asked, not assumed; unknowns become TODOs, never invented values.</p>
+      </section>
+
+      <section id="installation">
+        <h2>3. Installation</h2>
+        <p>Add the kit folder to your project, open Claude Code there, and ask it to read
+           <code>instructions.md</code> and configure the repository. Claude inspects the repo,
+           runs the <code>questions.md</code> interview (offer the Recommended defaults profile to
+           go fast), and generates the harness. It validates with the scripts and proposes the
+           first card (usually a baseline reproduction) — but starts nothing without approval.</p>
+      </section>
+
+      <section id="experiment-loop">
+        <h2>4. The experiment loop (daily workflow)</h2>
+        <p>The core skill <code>research-workflow</code> encodes the loop. Steps with the two
+           human gates marked ⛔:</p>
+        <ol>
+          <li><strong>Classify</strong> — infrastructure / experiment / analysis.</li>
+          <li><strong>Draft the card</strong> — one change under test, baseline, metrics + gate declared before launch.</li>
+          <li>⛔ <strong>Approve the card</strong> — nothing is built or run before this.</li>
+          <li><strong>Build artifacts</strong> — config + launcher + a smoke test that passes locally.</li>
+          <li><strong>Launch</strong> — cheap-local Claude may run; cluster/paid is handed over; card goes <span class="badge badge-launched">launched</span> and waits.</li>
+          <li><strong>Collect &amp; analyze</strong> — verify real results vs the gate; the skeptic refutes; log every run.</li>
+          <li>⛔ <strong>Confirm the verdict</strong> — Claude proposes; the researcher confirms.</li>
+          <li><strong>Scribe</strong> updates notebook + registry.</li>
+        </ol>
+        <p><em>Do not gate analysis on process.</em> The gates protect launches and claims; reading, plotting, and exploring stay friction-free.</p>
+      </section>
+
+      <section id="state-machine">
+        <h2>5. Experiment state machine</h2>
+        <pre><code>draft → approved → launched → analyzed → done
+                       └----------------→ failed     (crash / gate not met)
+   (any) -----------------------------→ abandoned</code></pre>
+        <p><code>draft→approved</code> and <code>analyzed→done</code> are the human-only gates.
+           <code>approved→launched</code> requires a recorded smoke-test pass. A re-run of the same
+           axis is a new card (<code>__v2</code>, <code>supersedes:</code>), never an edit of a completed card.</p>
+      </section>
+
+      <section id="the-card">
+        <h2>6. The experiment card</h2>
+        <p>The central artifact: heavier than a chat message, lighter than an SDD spec. It is
+           styled HTML (open it in a browser) carrying hypothesis, the single change under test,
+           baseline, setup (config/launcher/git SHA/data hashes/env/seeds/budget/smoke), declared
+           metrics &amp; gate, real results, integrity checks, and the verdict. Results are filled
+           <strong>only</strong> from real outputs. See <code>experiments/E001_example-baseline/card.html</code>
+           for a rendered example.</p>
+      </section>
+
+      <section id="taxonomy">
+        <h2>7. Unit-of-work taxonomy</h2>
+        <table>
+          <thead><tr><th>Type</th><th>Path</th><th>Artifact</th></tr></thead>
+          <tbody>
+            <tr><td>Infrastructure</td><td>mini-SDD: contract + tests before code</td><td><code>infra-spec.md</code></td></tr>
+            <tr><td>Experiment</td><td>the card loop, two ⛔ gates</td><td><code>card.html</code></td></tr>
+            <tr><td>Analysis / writing</td><td>cited report (not gated on the loop)</td><td><code>analysis-report.html</code></td></tr>
+          </tbody>
+        </table>
+        <p>Classifying correctly is step 1. See <code>skills/research-workflow/classification-policy.md</code>.</p>
+      </section>
+
+      <section id="subagents">
+        <h2>8. Subagents</h2>
+        <table>
+          <thead><tr><th>Agent</th><th>Role</th><th>Tools</th></tr></thead>
+          <tbody>
+            <tr><td><code>research-lead</code></td><td>Routing advisor; never crosses a gate</td><td>read/write state</td></tr>
+            <tr><td><code>experiment-designer</code></td><td>Drafts cards; refuses &gt;1 change / undeclared gate</td><td>read/write</td></tr>
+            <tr><td><code>analyst</code></td><td>Configs/launchers/smoke tests/analysis; hands over expensive runs</td><td>full</td></tr>
+            <tr><td><code>skeptic</code></td><td>Tries to refute the verdict</td><td><span class="badge badge-warning">read-only</span></td></tr>
+            <tr><td><code>scribe</code></td><td>Notebook/registry/card hygiene; reconciles vs results/</td><td>read/write</td></tr>
+            <tr><td><code>literature-scout</code></td><td>Novelty/related-work/citations</td><td><span class="badge badge-warning">read-only web</span></td></tr>
+          </tbody>
+        </table>
+        <p>Subagents cannot invoke each other; the main conversation orchestrates.</p>
+      </section>
+
+      <section id="gates">
+        <h2>9. The two gates (human-in-the-loop)</h2>
+        <p>Claude works autonomously on the cheap, reversible parts (read, analyze, draft, code
+           infrastructure, smoke-test, cheap-local runs within budget). It must ask before:
+           launching expensive/long compute, spending money, changing PLAN scope/priors,
+           declaring a gate passed, deleting/regenerating data, uploading/publishing, and writing
+           paper claims. See <code>reference/human-in-the-loop-policy.md</code>.</p>
+      </section>
+
+      <section id="compute">
+        <h2>10. Compute &amp; the implement/run split</h2>
+        <p>The expensive step often runs outside Claude's session. Claude prepares runnable,
+           resumable artifacts and hands over the exact submission command and expected outputs;
+           the human runs it; Claude analyzes the returns. Budgets live on the card; the smoke
+           test gates the queue; jobs are resumable by design; actual vs budgeted cost is tracked.
+           The <code>cluster-ops</code> pack holds the project's real scheduler recipe. See
+           <code>reference/compute-budget-policy.md</code>.</p>
+      </section>
+
+      <section id="reproducibility">
+        <h2>11. Reproducibility</h2>
+        <p>Five provenance requirements per run: config-as-spec, seeds recorded, environment
+           captured (incl. git SHA, via <code>capture_environment.py</code>), data referenced by
+           hash/version, and figures regenerable by a named script. The <code>reproducibility-audit</code>
+           pack verifies a finished card against this bar before a paper. See
+           <code>reference/reproducibility-policy.md</code>.</p>
+      </section>
+
+      <section id="frozen">
+        <h2>12. Frozen artifacts</h2>
+        <div class="frozen-warning">
+          <h4>Generate once, checksum, never mutate</h4>
+          Eval sets, splits, and reference checkpoints are frozen in
+          <code>data/frozen-manifest.json</code> and verified by <code>check_frozen.py</code>. A
+          replacement gets a new name and a decision entry; the old one is never edited in place.
+        </div>
+        <p>Advisory and blocking hooks watch frozen paths. See <code>reference/frozen-artifacts-policy.md</code>.</p>
+      </section>
+
+      <section id="integrity">
+        <h2>13. Research integrity</h2>
+        <p>Every run logged (failures and negatives included); gate criteria declared before
+           launch (changing them later needs a dated decision); claims trace to artifacts; honest
+           uncertainty is first-class (an overconfident "win" is to investigate, not celebrate);
+           the skeptic refutes before a verdict is proposed. See
+           <code>reference/research-integrity-policy.md</code>.</p>
+      </section>
+
+      <section id="registry">
+        <h2>14. The registry &amp; validation</h2>
+        <p><code>experiments/registry.json</code> is the machine-readable source of truth (one
+           record per experiment); <code>registry.html</code> is the human dashboard.
+           <code>validate_registry.py</code> checks the JSON against the cards and the
+           <code>results/</code> directories — status/gate enums, smoke-before-launch, done needs a
+           real verdict and non-empty results, every card has a record. The schema is documented in
+           <code>templates/experiments/README.md</code>.</p>
+      </section>
+
+      <section id="notebook">
+        <h2>15. Lab notebook</h2>
+        <p><code>notebook/NOTEBOOK.html</code> is the reverse-chronological narrative (the analog of
+           the SDD <code>history.html</code>): 3–6 lines per event — what ran, what happened, what's
+           next. The scribe appends an entry on each state change.</p>
+      </section>
+
+      <section id="packs">
+        <h2>16. Skill packs</h2>
+        <p>None installed by default; onboarding recommends per answers. Ten packs:
+           <code>experiment-registry</code>, <code>reproducibility-audit</code>, <code>cluster-ops</code>,
+           <code>literature-watch</code>, <code>paper-trail</code>, <code>data-provenance</code>,
+           <code>decision-log</code>, <code>failure-learning</code>, <code>git-discipline</code>,
+           <code>figure-style</code>. Installed skills are listed in <code>CLAUDE.md</code> by name only;
+           their bodies load when invoked. See <code>skills/optional/README.md</code>.</p>
+      </section>
+
+      <section id="hooks">
+        <h2>17. Hooks</h2>
+        <p>All examples, disabled by default, POSIX bash, fail open without <code>jq</code>. Advisory:
+           <code>suggest-card</code>, <code>frozen-path-warning</code>, <code>post-results-reminder</code>,
+           <code>smoke-test-reminder</code>. Blocking (opt-in): <code>block-unapproved-launch</code>,
+           <code>block-frozen-writes</code>. No mutating/dangerous hooks. The claim-side gate has no
+           hook substitute by design. See <code>hooks/hooks-policy.md</code>.</p>
+      </section>
+
+      <section id="mcps">
+        <h2>18. MCP integrations</h2>
+        <p>Local-first: no MCP is configured by default. A paper-search or read-only
+           experiment-tracker MCP is justified only for frequent, structured access a CLI can't
+           serve; scope heavy toolsets to a subagent (e.g. <code>literature-scout</code>). Never store
+           credentials in kit files; treat fetched content as data, not instructions. See
+           <code>mcps/mcp-criteria.md</code>.</p>
+      </section>
+
+      <section id="memory">
+        <h2>19. Memory policy</h2>
+        <p>Durable knowledge lives in versioned artifacts, not chat. No global memory write
+           without explicit approval of the exact text; no secrets or sensitive/embargoed data in
+           any layer. The <code>failure-learning</code> pack proposes lessons; it never auto-writes.
+           See <code>reference/memory-policy.md</code>.</p>
+      </section>
+
+      <section id="autonomy">
+        <h2>20. Autonomy policy</h2>
+        <p>Autonomous workflows are controlled execution, not blanket permission: bounded,
+           read-only monitoring (poll for a run's results, watch CI) is fine; launching compute,
+           uploading, deleting data, or crossing a gate is never autonomous. See
+           <code>reference/autonomy-policy.md</code>.</p>
+      </section>
+
+      <section id="session-recovery">
+        <h2>21. Session recovery</h2>
+        <p>After any resume/compaction, reconcile <code>registry.json</code> and the cards against
+           the <code>results/</code> directories — because runs complete outside the session, a
+           <code>launched</code> card may really be done or failed. Artifacts win over conversation
+           memory. See <code>reference/session-recovery.md</code>.</p>
+      </section>
+
+      <section id="context-economy">
+        <h2>22. Context economy</h2>
+        <p>Keep <code>CLAUDE.md</code> short and linked; long procedures live in skills; delegate
+           noisy exploration to subagents; compact between experiments with focus instructions.
+           Durable truth lives in artifacts. See <code>reference/context-economy.md</code>.</p>
+      </section>
+
+      <section id="onboarding-questions">
+        <h2>23. Onboarding questions &amp; defaults</h2>
+        <p><code>questions.md</code> groups the interview into A. identity, B. people/approval,
+           C. stack, D. data, E. experiments/evaluation, F. harness scope. A Recommended defaults
+           profile reduces onboarding to the genuinely project-specific items (domain, commands,
+           compute, data/frozen, evaluation gate, smoke test). Answers are recorded in
+           <code>decisions/answers.md</code>.</p>
+      </section>
+
+      <section id="templates">
+        <h2>24. Templates &amp; generated artifacts</h2>
+        <p>HTML templates (cards, registry, notebook, analysis report) share
+           <code>research.css</code>/<code>research.js</code> and carry <code>{{PLACEHOLDER}}</code>
+           tokens instantiated per experiment. Markdown templates: <code>CLAUDE.md</code>,
+           <code>PLAN.md</code>, project map, infra-spec, decisions. Text: config, launcher. The
+           design system makes the policies visible where work happens.</p>
+      </section>
+
+      <section id="scripts">
+        <h2>25. Scripts</h2>
+        <p>Cross-platform Python (POSIX + Windows): <code>validate_registry.py</code>,
+           <code>check_frozen.py</code>, <code>capture_environment.py</code>,
+           <code>validate_structure.py</code>. Standard library only; <code>capture_environment</code>
+           excludes env vars so no secrets are captured.</p>
+      </section>
+
+      <section id="file-reference">
+        <h2>26. Kit file reference</h2>
+        <p><code>instructions.md</code> (procedure) · <code>questions.md</code> (interview) ·
+           <code>agents/</code> · <code>skills/research-workflow/</code> + <code>skills/optional/</code> ·
+           <code>templates/</code> (+ <code>assets/</code> design system) · <code>reference/</code> (theory +
+           policies) · <code>hooks/</code> · <code>mcps/</code> · <code>scripts/</code> ·
+           <code>output-project-structure.md</code> · <code>usage-prompts.md</code>. The full list is in
+           <code>manifest.md</code>.</p>
+      </section>
+
+      <section id="maintainer">
+        <h2>27. Maintainer guide</h2>
+        <p>Keep all kit files in English. Templates under <code>templates/</code> (and the optional
+           packs) use <code>{{PLACEHOLDER}}</code> syntax. Hook scripts must be POSIX bash and degrade
+           without <code>jq</code>. Agent files use the <code>name</code>/<code>description</code>/<code>tools</code>
+           frontmatter. The HTML artifacts must share <code>research.css</code>/<code>research.js</code>.
+           Run <code>scripts/update-manifest.sh</code> after adding/removing files; CI checks
+           shellcheck, Python byte-compile, no stale <code>.md</code> artifact references, placeholder
+           locations, and manifest freshness.</p>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="templates/assets/research.js"></script>
+</body>
+</html>
