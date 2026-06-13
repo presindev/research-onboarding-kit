@@ -8,6 +8,16 @@
 - `.gitignore`
 - `LICENSE`
 - `manifest.md`
+- `reference/autonomy-policy.md`
+- `reference/compute-budget-policy.md`
+- `reference/context-economy.md`
+- `reference/frozen-artifacts-policy.md`
+- `reference/human-in-the-loop-policy.md`
+- `reference/memory-policy.md`
+- `reference/rdd-theory.md`
+- `reference/reproducibility-policy.md`
+- `reference/research-integrity-policy.md`
+- `reference/session-recovery.md`
 - `scripts/update-manifest.sh`
 - `templates/assets/research.css`
 - `templates/assets/research.js`
