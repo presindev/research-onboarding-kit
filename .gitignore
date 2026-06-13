@@ -7,6 +7,7 @@ research-onboarding-kit-blueprint.md
 # Maintainer scratch files
 bugs.md
 todolist.md
+design-preview.html
 
 # Python (the kit ships cross-platform .py validators)
 __pycache__/

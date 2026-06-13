@@ -9,3 +9,5 @@
 - `LICENSE`
 - `manifest.md`
 - `scripts/update-manifest.sh`
+- `templates/assets/research.css`
+- `templates/assets/research.js`
