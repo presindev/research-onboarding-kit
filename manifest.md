@@ -21,7 +21,11 @@
 - `hooks/examples/suggest-card.sh`
 - `hooks/hooks-policy.md`
 - `hooks/settings-snippets.md`
+- `instructions.md`
 - `manifest.md`
+- `mcps/mcp-criteria.md`
+- `output-project-structure.md`
+- `questions.md`
 - `reference/autonomy-policy.md`
 - `reference/compute-budget-policy.md`
 - `reference/context-economy.md`
@@ -61,3 +65,4 @@
 - `templates/project-map.md.template`
 - `templates/registry.html.template`
 - `templates/registry.json.template`
+- `usage-prompts.md`
