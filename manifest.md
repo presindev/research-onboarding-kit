@@ -7,6 +7,12 @@
 - `.github/workflows/ci.yml`
 - `.gitignore`
 - `LICENSE`
+- `agents/analyst.md`
+- `agents/experiment-designer.md`
+- `agents/literature-scout.md`
+- `agents/research-lead.md`
+- `agents/scribe.md`
+- `agents/skeptic.md`
 - `manifest.md`
 - `reference/autonomy-policy.md`
 - `reference/compute-budget-policy.md`
@@ -19,6 +25,13 @@
 - `reference/research-integrity-policy.md`
 - `reference/session-recovery.md`
 - `scripts/update-manifest.sh`
+- `skills/research-workflow/SKILL.md`
+- `skills/research-workflow/classification-policy.md`
+- `skills/research-workflow/examples.md`
+- `skills/research-workflow/experiment-card-format.md`
+- `skills/research-workflow/experiment-state-machine.md`
+- `skills/research-workflow/skeptic-checklist.md`
+- `skills/research-workflow/workflow.md`
 - `templates/CLAUDE.md.template`
 - `templates/PLAN.md.template`
 - `templates/analysis-report.html.template`
