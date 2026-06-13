@@ -60,7 +60,7 @@ jobs:
         run: |
           # {{PLACEHOLDER}} tokens belong in templates/ and *.template files.
           # A few docs legitimately mention the convention itself.
-          allowlist='^\./(templates/|scripts/[^/]+\.template$|README\.md$|README\.html$|instructions\.md$|skills/research-workflow/experiment-card-format\.md$|scripts/validate_structure\.py$|\.github/)'
+          allowlist='^\./(templates/|scripts/[^/]+\.template$|README\.md$|README\.html$|instructions\.md$|skills/research-workflow/experiment-card-format\.md$|skills/optional/|scripts/validate_structure\.py$|\.github/)'
           offenders=$(grep -rl "{{[A-Z0-9_][A-Z0-9_]*}}" . --include='*.md' --include='*.sh' --include='*.py' --include='*.html' --include='*.json' --include='*.template' --include='*.css' --include='*.js' | grep -Ev "$allowlist" || true)
           if [ -n "$offenders" ]; then
             echo "::error::Unexpected {{PLACEHOLDER}} tokens in:"

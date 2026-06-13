@@ -41,6 +41,17 @@
 - `scripts/update-manifest.sh`
 - `scripts/validate_registry.py`
 - `scripts/validate_structure.py`
+- `skills/optional/README.md`
+- `skills/optional/cluster-ops/SKILL.md`
+- `skills/optional/data-provenance/SKILL.md`
+- `skills/optional/decision-log/SKILL.md`
+- `skills/optional/experiment-registry/SKILL.md`
+- `skills/optional/failure-learning/SKILL.md`
+- `skills/optional/figure-style/SKILL.md`
+- `skills/optional/git-discipline/SKILL.md`
+- `skills/optional/literature-watch/SKILL.md`
+- `skills/optional/paper-trail/SKILL.md`
+- `skills/optional/reproducibility-audit/SKILL.md`
 - `skills/research-workflow/SKILL.md`
 - `skills/research-workflow/classification-policy.md`
 - `skills/research-workflow/examples.md`
@@ -61,6 +72,7 @@
 - `templates/experiments/README.md`
 - `templates/infra-spec.md.template`
 - `templates/launcher.sh.template`
+- `templates/memory/failure-learning-entry.md`
 - `templates/notebook/NOTEBOOK.html.template`
 - `templates/project-map.md.template`
 - `templates/registry.html.template`
