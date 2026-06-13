@@ -1,0 +1,6 @@
+{
+  "project": "{{PROJECT_NAME}}",
+  "id_convention": "{{ID_CONVENTION}}",
+  "schema_version": 1,
+  "experiments": []
+}

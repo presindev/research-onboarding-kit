@@ -1,0 +1,39 @@
+# config for {{ID}} — one config fully specifies one experiment (= one card).
+# This file IS the machine-readable spec of the run. Every knob that affects the
+# result lives here, not in ad-hoc command-line edits. Versioned in git.
+# See reference/reproducibility-policy.md (config-as-spec, seeds).
+
+experiment:
+  id: {{ID}}                      # matches the card, launcher, and results dir
+  card: experiments/{{ID}}/card.html
+  plan_ref: {{PLAN_REF}}
+
+# --- The single change under test vs. the baseline ---
+# Keep this explicit so the diff against the baseline config is one thing.
+change_under_test: {{SINGLE_CHANGE_DESCRIPTION}}
+
+seed: {{SEED}}                    # all RNG seeded from here; list extra seeds for multi-seed runs
+seeds: [{{SEEDS_LIST}}]
+
+data:
+  dataset: {{DATASET_ID}}
+  checksum: {{DATASET_CHECKSUM}}  # data referenced by hash/version, never a bare path
+  frozen_inputs: [{{FROZEN_IDS_OR_EMPTY}}]   # verified by check_frozen.py before trusting results
+
+model:
+  {{MODEL_KEY}}: {{MODEL_VALUE}}
+
+train:
+  {{TRAIN_KEY}}: {{TRAIN_VALUE}}
+
+# --- Output & resumption (compute-budget-policy.md: resumable by design) ---
+output:
+  dir: results/{{ID}}/
+  checkpoint_dir: results/{{ID}}/checkpoints/
+resume:
+  enabled: true
+  from: latest                    # launcher passes --resume so preemption costs only since last checkpoint
+
+budget:
+  gpu_hours: {{GPU_HOURS}}
+  walltime: {{WALLTIME}}

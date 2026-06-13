@@ -1,0 +1,41 @@
+# RDD onboarding decisions — {{PROJECT_NAME}}
+
+Recorded answers to the onboarding interview (`questions.md`). This is the
+durable record of how the harness was configured. Fill every line; mark unknowns
+as `TODO`.
+
+## A. Project identity
+- Research domain & one-sentence goal:
+- Prior publication / baseline (and where it lives — papers, code, checkpoints):
+- Publication target & rough timeline:
+
+## B. People & approval
+- Solo or team:
+- Who approves what (card approval / verdict confirmation / gate sign-off):
+- Default language for generated artifacts (kit files stay English):
+
+## C. Technical stack
+- Languages / frameworks / environment (conda/venv/container) / test runner:
+- Where code runs (local / cluster + scheduler / cloud / mixed); GPU on Claude's machine; who launches long jobs:
+- Experiment tracker already in use (W&B / MLflow / TensorBoard / none):
+
+## D. Data
+- Data sources, sizes, licenses/sensitivity (PII? embargoed? open?):
+- Must NEVER be uploaded / printed / committed:
+- Artifacts to FREEZE (eval sets, splits, reference checkpoints):
+- Data versioning convention (DVC / hashes / dated filenames / none):
+
+## E. Experiments & evaluation
+- Evaluation metric(s) and pass/gate criterion (or TODO gate in PLAN.md):
+- Compute budget per experiment and per month:
+- Smoke-test definition (smallest run proving no crash) (or TODO):
+- Experiment naming convention (default `E<seq>_<slug>`):
+
+## F. Harness scope
+- Optional packs installed:
+- Optional packs declined:
+- Hooks: none / advisory only / advisory + blocking:
+- Existing conventions adopted instead of kit templates (notebook/ADRs/style):
+
+## Open TODOs
+- TODO:

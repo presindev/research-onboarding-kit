@@ -1,0 +1,30 @@
+# Rejected options — {{PROJECT_NAME}}
+
+Approaches, models, datasets, and methods this project considered and rejected.
+Recording them prevents future sessions from re-litigating settled questions
+("why don't we just use X?" — because we tried, and here is why not).
+
+Rules:
+
+- Append new entries below the marker, newest first.
+- Log only options that were seriously considered and meaningfully rejected.
+- Never log secrets, credentials, or sensitive/embargoed data.
+- Proposed by Claude, recorded only after the researcher accepts.
+- If the conditions that caused the rejection change, add a new entry that
+  reopens the question; do not delete the old one.
+
+Entry format:
+
+```markdown
+## <YYYY-MM-DD> — <option that was rejected>
+
+- Status: rejected          # rejected | reopened | superseded
+- Rejected in favor of: <the chosen approach; link the decision entry if one exists>
+- Reason: <why it lost — cite the card/result if an experiment settled it>
+- Revisit if: <conditions that would reopen the question, or "unlikely">
+- Source: <card ID / analysis report / notebook entry>
+```
+
+---
+
+No entries yet.

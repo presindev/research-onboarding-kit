@@ -1,0 +1,46 @@
+# Infra spec — {{MODULE_NAME}}
+
+*The mini-SDD path. Infrastructure tasks (pipelines, libraries, evaluation code,
+data loaders) are ordinary software and get ordinary software discipline: a short
+contract + acceptance tests before code, and tests must pass before the task is
+done. Use this instead of an experiment card when the work is plumbing, not a
+hypothesis test. If a task needs a traceability matrix, it belongs here, not on a
+card.*
+
+## Purpose
+
+{{ONE_PARAGRAPH_PURPOSE}}
+
+## Interface / contract
+
+What this module exposes and guarantees — signatures, inputs/outputs, invariants,
+error behavior.
+
+```text
+{{INTERFACE}}
+```
+
+## Acceptance tests
+
+Each row is a test that must pass before this task is `done`.
+
+| ID | Given | When | Then |
+|---|---|---|---|
+| AT-1 | {{GIVEN}} | {{WHEN}} | {{THEN}} |
+
+Test command: `{{TEST_COMMAND}}`.
+
+## Dependencies
+
+External libraries/APIs this touches: {{DEPENDENCIES_OR_NONE}}.
+
+## Out of scope
+
+{{OUT_OF_SCOPE}}
+
+## Notes
+
+- Infrastructure that produces a **frozen artifact** (e.g. code that draws an
+  eval split) still records its seed and config so the artifact is reproducible
+  (`reference/reproducibility-policy.md`), and registers the output in the frozen
+  manifest (`reference/frozen-artifacts-policy.md`).

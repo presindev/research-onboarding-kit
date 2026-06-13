@@ -1,0 +1,33 @@
+# Methodological & architecture decisions — {{PROJECT_NAME}}
+
+Durable decisions for this project: methodology, experimental design choices,
+infrastructure architecture. This file is project memory — it answers "why is it
+done this way?" for future sessions and collaborators.
+
+Rules:
+
+- Append new entries below the marker, newest first.
+- Log only significant decisions. Trivial choices do not belong here.
+- Never log secrets, credentials, or sensitive/embargoed data.
+- A decision is **proposed** by Claude and recorded only after the researcher
+  accepts it (`reference/human-in-the-loop-policy.md`).
+- When a decision is replaced, mark the old entry `Status: superseded by …`
+  instead of deleting it.
+
+Entry format:
+
+```markdown
+## <YYYY-MM-DD> — <short decision title>
+
+- Status: active            # active | superseded | rejected
+- Context: <why a decision was needed — what result, failure, or constraint prompted it>
+- Decision: <what was decided>
+- Alternatives rejected: <what lost; details may go to rejected-options.md>
+- Consequences: <what this commits the project to>
+- Revisit if: <conditions that would reopen the question, or "unlikely">
+- Source: <card ID / analysis report / notebook entry that settled it>
+```
+
+---
+
+No entries yet.

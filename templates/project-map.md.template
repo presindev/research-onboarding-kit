@@ -1,0 +1,43 @@
+# Project map — {{PROJECT_NAME}}
+
+*Orientation for Claude: where things live, how to run them, what is protected.
+Keep it concise — a shallow annotated tree (2–3 levels), not an exhaustive
+listing. Update when the structure changes significantly. Default location:
+`.claude/context/project-map.md`. Never record secrets or credentials.*
+
+## Directory tree (current)
+
+```text
+{{ANNOTATED_TREE_2_3_LEVELS}}
+```
+
+## Planned / not-yet-created
+
+{{PLANNED_DIRS_OR_NONE}}
+
+## Entrypoints & commands
+
+| Purpose | Command |
+|---|---|
+| Environment setup | `{{ENV_SETUP_COMMAND}}` |
+| Tests (infrastructure) | `{{TEST_COMMAND}}` |
+| Lint / typecheck | `{{LINT_COMMAND}}` |
+| Smoke test | `{{SMOKE_TEST_COMMAND}}` |
+| Train / main run | `{{MAIN_RUN_COMMAND}}` |
+| Submit long job | `{{SUBMIT_COMMAND}}` |
+
+Unknown commands are `TODO: ask the researcher` — never invented.
+
+## Protected / frozen areas
+
+- Frozen artifacts (never mutate): {{FROZEN_PATHS_OR_NONE}} — see `data/frozen-manifest.json`.
+- Protected reference code / baselines: {{PROTECTED_PATHS_OR_NONE}}.
+- Sensitive / embargoed data (never upload/print/commit): {{SENSITIVE_PATHS_OR_NONE}}.
+
+## Key external facts
+
+- Datasets: {{DATASETS}}
+- Baselines / prior work: {{BASELINES}}
+- Competing / related work to track: {{RELATED_WORK_OR_NONE}}
+- Experiment tracker in use (if any): {{TRACKER_OR_NONE}}
+- Compute environment: {{COMPUTE_ENV}} (scheduler: {{SCHEDULER_OR_NONE}}; GPU on Claude's machine: {{GPU_YES_NO}})

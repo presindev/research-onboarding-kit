@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Launcher for {{ID}}. Carries the experiment ID, output convention, and resume
+# flag. The SMOKE TEST must pass locally before this is queued
+# (reference/compute-budget-policy.md). The scheduler block below is filled per
+# the project's answers (Q7); unknown values stay as TODO, never invented.
+set -euo pipefail
+
+ID="{{ID}}"
+CONFIG="configs/${ID}.yaml"
+OUTDIR="results/${ID}"
+mkdir -p "${OUTDIR}"
+
+# ── Scheduler directives (filled per project; delete if running locally) ───────
+{{SCHEDULER_DIRECTIVES_BLOCK}}
+# Example SLURM (replace with the project's real partition/account/limits):
+# #SBATCH --job-name={{ID}}
+# #SBATCH --partition={{PARTITION}}
+# #SBATCH --gres=gpu:{{N_GPUS}}
+# #SBATCH --time={{WALLTIME}}
+# #SBATCH --output=results/{{ID}}/slurm-%j.out
+
+# ── Environment ────────────────────────────────────────────────────────────────
+{{ENV_ACTIVATION_COMMANDS}}     # e.g. module load ...; conda activate ...  (TODO if unknown)
+
+# ── Capture environment for reproducibility ────────────────────────────────────
+python scripts/capture_environment.py --out "${OUTDIR}/env.json" || true
+
+# ── Smoke test gate (run with SMOKE=1 to do only the tiny sanity run) ───────────
+if [ "${SMOKE:-0}" = "1" ]; then
+  echo "Running smoke test for ${ID}..."
+  {{SMOKE_TEST_COMMAND}}
+  exit $?
+fi
+
+# ── Main run (resumable: --resume continues from the latest checkpoint) ─────────
+{{MAIN_RUN_COMMAND}} --config "${CONFIG}" --output "${OUTDIR}" --resume
+
+# Hand-over note for cluster use: the human submits this file (e.g.
+#   sbatch launchers/{{ID}}.sh
+# ) and pastes back the job ID; Claude marks the card `launched` and waits.
