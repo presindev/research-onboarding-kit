@@ -1,0 +1,13 @@
+{
+  "frozen": [
+    {
+      "id": "cifar10_test_frozen",
+      "path": "data/frozen/cifar10_test_frozen.txt",
+      "kind": "test-set",
+      "created": "2026-06-10",
+      "created_by": "E001_example-baseline",
+      "note": "Reference example. Never reshuffle/regenerate; replacements get a new id + a decision.",
+      "checksum": "sha256:d45da764974eb40a1ddf63ec273575ae58799a5fcbe379cd5172246817af68e8"
+    }
+  ]
+}

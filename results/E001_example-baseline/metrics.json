@@ -1,0 +1,9 @@
+{
+  "experiment": "E001_example-baseline",
+  "seed": 1337,
+  "test_accuracy": 0.9312,
+  "published_accuracy": 0.9300,
+  "delta": 0.0012,
+  "epochs": 100,
+  "note": "Reference example output — illustrative numbers only."
+}

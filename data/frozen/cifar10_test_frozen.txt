@@ -1,0 +1,2 @@
+Reference example: stand-in for the frozen CIFAR-10 test split.
+Illustrative bytes only.

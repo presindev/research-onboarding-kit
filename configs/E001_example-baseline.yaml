@@ -1,0 +1,36 @@
+# config for E001_example-baseline — reference example (illustrative).
+# One config fully specifies one experiment (= one card).
+experiment:
+  id: E001_example-baseline
+  card: experiments/E001_example-baseline/card.html
+  plan_ref: PLAN.md §1
+
+change_under_test: none (baseline reproduction — match the published recipe exactly)
+
+seed: 1337
+seeds: [1337, 1338, 1339]
+
+data:
+  dataset: cifar10
+  checksum: sha256:e1f2a3...           # illustrative
+  frozen_inputs: [cifar10_test_frozen] # verified by check_frozen.py before trusting results
+
+model:
+  arch: resnet20
+
+train:
+  optimizer: sgd
+  lr: 0.1
+  batch_size: 128
+  epochs: 100
+
+output:
+  dir: results/E001_example-baseline/
+  checkpoint_dir: results/E001_example-baseline/checkpoints/
+resume:
+  enabled: true
+  from: latest
+
+budget:
+  gpu_hours: 2
+  walltime: "02:00:00"

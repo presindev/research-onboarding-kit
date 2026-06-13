@@ -13,6 +13,14 @@
 - `agents/research-lead.md`
 - `agents/scribe.md`
 - `agents/skeptic.md`
+- `configs/E001_example-baseline.yaml`
+- `data/frozen-manifest.json`
+- `data/frozen/cifar10_test_frozen.txt`
+- `experiments/E001_example-baseline/card.html`
+- `experiments/registry.html`
+- `experiments/registry.json`
+- `experiments/research.css`
+- `experiments/research.js`
 - `hooks/examples/block-frozen-writes.sh`
 - `hooks/examples/block-unapproved-launch.sh`
 - `hooks/examples/frozen-path-warning.sh`
@@ -22,8 +30,12 @@
 - `hooks/hooks-policy.md`
 - `hooks/settings-snippets.md`
 - `instructions.md`
+- `launchers/E001_example-baseline.sh`
 - `manifest.md`
 - `mcps/mcp-criteria.md`
+- `notebook/NOTEBOOK.html`
+- `notebook/research.css`
+- `notebook/research.js`
 - `output-project-structure.md`
 - `questions.md`
 - `reference/autonomy-policy.md`
@@ -36,6 +48,7 @@
 - `reference/reproducibility-policy.md`
 - `reference/research-integrity-policy.md`
 - `reference/session-recovery.md`
+- `results/E001_example-baseline/metrics.json`
 - `scripts/capture_environment.py`
 - `scripts/check_frozen.py`
 - `scripts/update-manifest.sh`

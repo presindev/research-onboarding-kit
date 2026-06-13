@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment registry — Example RDD project</title>
+  <link rel="stylesheet" href="research.css">
+</head>
+<!-- RENDERED REFERENCE EXAMPLE dashboard. Source of truth: registry.json. -->
+<body>
+<div class="page-wrap">
+  <nav class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">EXAMPLE RDD
+        <span>experiment registry</span>
+      </div>
+    </div>
+    <p class="sidebar-title">Contents</p>
+    <div id="toc-list"></div>
+  </nav>
+
+  <div class="main-content">
+    <header class="spec-header">
+      <h1>Experiment registry — Example RDD project</h1>
+      <p>One row per experiment. Source of truth: <code>experiments/registry.json</code>.
+         ID convention: <code>E&lt;seq&gt;_&lt;slug&gt;</code>.</p>
+    </header>
+
+    <main>
+      <section id="active">
+        <h2>Experiments</h2>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Title</th><th>Status</th><th>Gate</th><th>Plan ref</th><th>Card</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>E001_example-baseline</code></td>
+              <td>Reproduce the published CNN baseline on CIFAR-10</td>
+              <td><span class="badge badge-done">done</span></td>
+              <td class="pass">pass</td>
+              <td>PLAN.md §1</td>
+              <td><a href="E001_example-baseline/card.html">card</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="superseded">
+        <h2>Superseded / abandoned</h2>
+        <p>None.</p>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="research.js"></script>
+</body>
+</html>

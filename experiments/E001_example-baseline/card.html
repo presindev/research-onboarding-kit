@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E001_example-baseline — Reproduce the published CNN baseline</title>
+  <link rel="stylesheet" href="../research.css">
+</head>
+<!-- RENDERED REFERENCE EXAMPLE. A complete experiment card at status `done`.
+     Illustrative numbers only. This folder is NOT installed into target projects
+     (it mirrors the SDD kit's specs/example-feature/). -->
+<body>
+<div class="page-wrap">
+  <nav class="sidebar" aria-label="Table of contents">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">EXAMPLE RDD
+        <span>experiment card</span>
+      </div>
+    </div>
+    <p class="sidebar-title">Contents</p>
+    <div id="toc-list"></div>
+  </nav>
+
+  <div class="main-content">
+    <header class="spec-header">
+      <h1>E001_example-baseline — Reproduce the published CNN baseline</h1>
+      <table class="meta-table">
+        <tbody>
+          <tr><th>Experiment ID</th><td><code>E001_example-baseline</code></td></tr>
+          <tr><th>Status</th>       <td><span class="badge badge-done">done</span></td></tr>
+          <tr><th>Plan ref</th>     <td>PLAN.md §1 (Phase 1 — baseline reproduction)</td></tr>
+          <tr><th>Supersedes</th>   <td>none</td></tr>
+          <tr><th>Approver</th>     <td>supervisor</td></tr>
+          <tr><th>Smoke test</th>   <td><span class="smoke smoke-ok">smoke: passed 2026-06-11</span></td></tr>
+        </tbody>
+      </table>
+    </header>
+
+    <main>
+      <section id="lifecycle">
+        <h2>Lifecycle</h2>
+        <ol class="task-timeline exp-timeline">
+          <li class="task-item draft"><div class="task-item-header"><span class="badge badge-draft">draft</span> Card drafted</div><div class="task-item-body">Goal: match the published 93.0% top-1 on CIFAR-10 before any new experiments.</div></li>
+          <li class="task-item approved"><div class="task-item-header"><span class="badge badge-approved">approved</span> ⛔ Supervisor approved</div><div class="task-item-body">Gate frozen; config + launcher + smoke test built.</div></li>
+          <li class="task-item launched"><div class="task-item-header"><span class="badge badge-launched">launched</span> Submitted to SLURM</div><div class="task-item-body">Job 88123; 3 seeds; awaited results (no fabricated numbers).</div></li>
+          <li class="task-item analyzed"><div class="task-item-header"><span class="badge badge-analyzed">analyzed</span> Results collected</div><div class="task-item-body">Verified vs gate; skeptic refutation pass done.</div></li>
+          <li class="task-item done"><div class="task-item-header"><span class="badge badge-done">done</span> ⛔ Verdict confirmed</div><div class="task-item-body">Baseline reproduced; registry + notebook updated.</div></li>
+        </ol>
+      </section>
+
+      <section id="hypothesis">
+        <h2>Hypothesis / question</h2>
+        <div class="req-row"><span class="req-id">H</span><span>Our pipeline reproduces the published ResNet-20 CIFAR-10 baseline (≈93.0% top-1), establishing a trustworthy reference for later experiments.</span></div>
+      </section>
+
+      <section id="change-under-test">
+        <h2>Change under test (exactly one)</h2>
+        <div class="req-row ac"><span class="req-id ac">CHANGE</span><span>None — this is a baseline reproduction. The recipe matches the published one exactly; the "change" is migrating it into our pipeline.</span></div>
+      </section>
+
+      <section id="baseline">
+        <h2>Baseline</h2>
+        <p>Published result: 93.0% top-1 (paper, Table 1). This card establishes the in-house baseline that later cards compare against.</p>
+      </section>
+
+      <section id="setup">
+        <h2>Setup</h2>
+        <table>
+          <tbody>
+            <tr><td>Config</td>       <td><code>configs/E001_example-baseline.yaml</code></td></tr>
+            <tr><td>Launcher</td>     <td><code>launchers/E001_example-baseline.sh</code></td></tr>
+            <tr><td>Code version</td> <td><code>a1b2c3d</code> (clean)</td></tr>
+            <tr><td>Data</td>         <td>cifar10 (sha256:e1f2a3…)</td></tr>
+            <tr><td>Frozen inputs</td><td><code>cifar10_test_frozen</code> — verified green by <code>check_frozen.py</code></td></tr>
+            <tr><td>Environment</td>  <td><code>results/E001_example-baseline/env.json</code></td></tr>
+            <tr><td>Seeds</td>        <td>1337, 1338, 1339</td></tr>
+            <tr><td>Budget</td>       <td>2 GPU-h (actual 1.7)</td></tr>
+            <tr><td>Smoke test</td>   <td><code>SMOKE=1 bash launchers/E001_example-baseline.sh</code> → passed 2026-06-11</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="metrics-gate">
+        <h2>Metrics &amp; gate criteria (declared BEFORE launch)</h2>
+        <div class="metric-row"><span class="req-id m">M-ACC</span><span>Top-1 accuracy on the frozen CIFAR-10 test set, mean over 3 seeds.</span></div>
+        <div class="gate-row"><span class="req-id gate">GATE</span><span>PASS if mean top-1 is within 0.5 pt of the published 93.0% (i.e. ≥ 92.5%).</span></div>
+      </section>
+
+      <section id="results">
+        <h2>Results</h2>
+        <p>Real outputs from <code>results/E001_example-baseline/</code> (3 seeds). Illustrative numbers.</p>
+        <table>
+          <thead><tr><th>Metric</th><th>Published</th><th>This run (mean±sd)</th><th>Gate</th><th>Verdict</th></tr></thead>
+          <tbody>
+            <tr><td>Top-1 accuracy</td><td>93.00%</td><td>93.12% ± 0.18</td><td>≥ 92.5%</td><td class="pass">PASS</td></tr>
+          </tbody>
+        </table>
+        <p>Artifacts: <code>results/E001_example-baseline/metrics.json</code>, training curves under the same dir.</p>
+      </section>
+
+      <section id="integrity">
+        <h2>Integrity checks</h2>
+        <div class="frozen-warning">
+          <h4>Frozen / leakage check</h4>
+          The test set <code>cifar10_test_frozen</code> is on the frozen manifest and was verified unchanged (<code>check_frozen.py</code> green). No tuning touched the test set; model selection used a separate validation split.
+        </div>
+        <div class="claude-note">
+          <h4>Skeptic notes</h4>
+          <ol>
+            <li>3 seeds, sd 0.18 pt — variance reported, difference vs published is within noise (consistent reproduction, not a claimed improvement).</li>
+            <li>No train/test overlap; augmentation seeded; could not refute the reproduction verdict.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="verdict">
+        <h2>Verdict vs gate</h2>
+        <p><strong>Proposed verdict:</strong> Baseline reproduced — mean 93.12% is within 0.5 pt of published; gate PASS.</p>
+        <table class="meta-table">
+          <tbody>
+            <tr><th>Gate met?</th>   <td>PASS</td></tr>
+            <tr><th>Proposed by</th> <td>Claude (analyst + skeptic)</td></tr>
+            <tr><th>Confirmed by</th><td>supervisor — <span class="badge badge-ok">confirmed 2026-06-12</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="follow-ups">
+        <h2>Follow-ups / decisions proposed</h2>
+        <ul>
+          <li>Reference baseline established; Phase 2 experiments may now compare against E001.</li>
+          <li>Proposed decision: "E001 is the canonical CIFAR-10 baseline" → architecture-decisions.md.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="../research.js"></script>
+</body>
+</html>
