@@ -18,6 +18,10 @@ target-project/
 │   └── E001_<slug>/
 │       ├── card.html                 # the experiment card
 │       └── analysis-report.html      # (optional, analysis tasks)
+├── specs/                            # (only when infra/spec tasks occur)
+│   ├── research.css  research.js     # copied so the HTML specs render
+│   └── <module>/
+│       └── infra-spec.html           # mini-SDD contract + acceptance tests (styled HTML)
 ├── notebook/
 │   ├── research.css  research.js
 │   └── NOTEBOOK.html                 # reverse-chronological lab notebook
@@ -47,10 +51,15 @@ target-project/
 ## Format conventions (mirrors the SDD kit's two-tier model)
 
 - **Styled HTML** (shared `research.css`/`research.js`): the experiment cards,
-  `registry.html`, `NOTEBOOK.html`, analysis reports. Open them in a browser.
+  `registry.html`, `NOTEBOOK.html`, analysis reports, infra-specs, and any other
+  human-facing spec/design/proposal doc (generic `doc.html` template). **Every
+  document a human is meant to read is styled HTML**, never plain Markdown — copy
+  `research.css`/`research.js` next to a new artifact so its link resolves. Open
+  them in a browser.
 - **Machine state**: `experiments/registry.json` is authoritative for status;
   `validate_registry.py` checks it against the cards and `results/`.
-- **Markdown**: `CLAUDE.md`, `PLAN.md`, skills, agents, decisions, project map.
+- **Markdown** (Claude-facing operational files only): `CLAUDE.md`, `PLAN.md`,
+  skills, agents, decisions, project map.
 - **Text**: `configs/*.yaml`, `launchers/*.sh`.
 
 ## Not installed into the target project

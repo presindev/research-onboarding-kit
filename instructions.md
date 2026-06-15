@@ -72,9 +72,9 @@ Create or update, in this order:
    pack is selected.
 7. The core skill: copy `skills/research-workflow/` to
    `.claude/skills/research-workflow/`. Copy the experiment-card, analysis-report,
-   config, and launcher templates the skill references into
-   `.claude/skills/research-workflow/templates/` (keep `{{PLACEHOLDER}}` tokens —
-   they are instantiated per experiment, not now).
+   infra-spec, generic `doc`, config, and launcher templates the skill references
+   into `.claude/skills/research-workflow/templates/` (keep `{{PLACEHOLDER}}`
+   tokens — they are instantiated per artifact, not now).
 8. Selected optional packs: copy `skills/optional/<name>/` to
    `.claude/skills/<name>/`, adapting placeholders. `cluster-ops` is **generated**
    project-specific (real scheduler commands), not copied verbatim — unknowns are
@@ -83,7 +83,7 @@ Create or update, in this order:
 10. Hooks: only if approved — copy chosen scripts to `.claude/hooks/` and add the
     entries from `hooks/settings-snippets.md` to `.claude/settings.json`. Confirm
     bash + `jq` are available first.
-11. Scripts: copy `scripts/{validate_structure,validate_registry,capture_environment,check_frozen}.py`
+11. Scripts: copy `scripts/{validate_structure,validate_registry,capture_environment,check_frozen,check_placeholders}.py`
     into the project's `scripts/`. If any artifacts are frozen, create
     `data/frozen-manifest.json` and record checksums with `check_frozen.py --write`.
 
@@ -91,6 +91,31 @@ Adapt every file to the project. Do not leave unresolved placeholders (Markdown,
 HTML, YAML, JSON) in final project files — except the per-experiment templates
 under `.claude/skills/research-workflow/templates/`, which keep their tokens by
 design.
+
+### Styled-HTML artifacts — do not get this wrong
+
+Every artifact a **human** is meant to read is the styled HTML from the matching
+template, never plain Markdown and never hand-written HTML without the design
+system. This covers the experiment cards, the registry dashboard, the lab
+notebook, analysis reports, infra-specs (the mini-SDD path), and **any other
+spec, design note, plan, or proposal** you produce later — use
+`templates/doc.html.template` for anything without a more specific template.
+Only the Claude-facing operational files stay Markdown (`CLAUDE.md`, skills,
+agents, the project map, decision logs).
+
+When you create or copy a styled HTML artifact:
+
+- Instantiate it from the template — keep the `<nav class="sidebar">` + `#toc-list`,
+  the `spec-header`, the section structure, and the documented class names
+  (`badge-*`, `req-row`, `metric-row`, `gate-row`, `frozen-warning`, the `pass`/
+  `fail`/`inconclusive` verdict cells). Do not invent new class names; the design
+  system only styles these.
+- Make the `research.css`/`research.js` link resolve: every HTML file references
+  `research.css`/`research.js` one level up (`../research.css`) or in its own
+  folder. **Copy `templates/assets/research.css` and `research.js` into any new
+  directory that holds an HTML artifact** (e.g. `specs/` for infra-specs, a
+  `docs/` folder for generic docs) — the same way `experiments/` and `notebook/`
+  get their copies above. One shared copy per directory tree is enough.
 
 Do **not** copy the kit's `experiments/E001_example-*/` reference example into
 the target project — it is a rendered reference for humans/agents, not part of
@@ -100,10 +125,18 @@ the installed harness.
 
 1. Run `python scripts/validate_structure.py` if safe.
 2. Run `python scripts/validate_registry.py` (empty registry is valid).
-3. Verify no unresolved placeholders remain (except the skill templates).
+3. Run `python scripts/check_placeholders.py` to confirm no unresolved placeholder
+   tokens remain. It scans only final project files — it skips the per-artifact
+   templates under `.claude/.../templates/` and `*.template` files (which keep their
+   tokens by design), so any token it reports is a *real* unresolved placeholder to
+   fix. Do **not** hand-grep for the brace tokens and warn about the intentional
+   template ones.
 4. Verify `CLAUDE.md` points to `.claude/skills/research-workflow/SKILL.md` and to
    `PLAN.md`, the registry, the notebook, and the project map.
-5. Verify the HTML artifacts open in a browser (research.css/js paths resolve).
+5. Verify each HTML artifact opens styled in a browser: its `research.css`/`research.js`
+   link resolves (a `research.css` exists one level up or in its own folder), the TOC
+   builds, and badges/timeline render. An unstyled page means a missing/`misplaced`
+   asset copy — fix it before finishing.
 6. Verify frozen artifacts (if any) are recorded and `check_frozen.py` is green.
 
 ## Phase 5 — Summary

@@ -9,7 +9,8 @@ branch at step 1.
 Use `classification-policy.md`.
 
 - **Infrastructure** (pipeline, library, eval code, data loader): take the
-  mini-SDD path — write an `infra-spec` (contract + acceptance tests) before
+  mini-SDD path — write an `infra-spec` (styled HTML,
+  `templates/infra-spec.html.template`: contract + acceptance tests) before
   code; tests must pass before `done`. Not the rest of this loop.
 - **Analysis / writing**: produce an analysis report whose every number cites a
   card or dataset ID. Not gated on the experiment loop — reading and plotting

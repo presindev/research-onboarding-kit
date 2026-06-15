@@ -54,6 +54,7 @@
 - `results/E001_example-baseline/metrics.json`
 - `scripts/capture_environment.py`
 - `scripts/check_frozen.py`
+- `scripts/check_placeholders.py`
 - `scripts/update-manifest.sh`
 - `scripts/validate_registry.py`
 - `scripts/validate_structure.py`
@@ -84,9 +85,10 @@
 - `templates/decisions/answers.md.template`
 - `templates/decisions/architecture-decisions.md.template`
 - `templates/decisions/rejected-options.md.template`
+- `templates/doc.html.template`
 - `templates/experiment-card.html.template`
 - `templates/experiments/README.md`
-- `templates/infra-spec.md.template`
+- `templates/infra-spec.html.template`
 - `templates/launcher.sh.template`
 - `templates/memory/failure-learning-entry.md`
 - `templates/notebook/NOTEBOOK.html.template`

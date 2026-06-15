@@ -25,6 +25,13 @@ Read the relevant file before acting:
 
 1. **Classify first.** Infrastructure → mini-SDD path (`infra-spec` + tests).
    Experiment → this loop. Analysis/writing → cited report.
+   - **Every human-facing artifact is styled HTML**, never plain Markdown: the
+     experiment card (`experiment-card.html`), infra-spec (`infra-spec.html`),
+     analysis report (`analysis-report.html`), registry, notebook, and any other
+     spec/design/proposal doc you produce for a human (`doc.html` template). They
+     all share `research.css`/`research.js` — copy those next to a new artifact so
+     its `../research.css` link resolves. Only Claude-facing operational files
+     (`CLAUDE.md`, skills, agents, project map, decision logs) stay Markdown.
 2. **No config, launcher, or run before the card is approved (⛔ gate 1).**
 3. **Smoke test must pass locally before any expensive/cluster launch.**
 4. **Results are filled only from real outputs.** No fabricated or "expected"

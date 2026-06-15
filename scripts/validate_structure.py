@@ -39,6 +39,7 @@ RECOMMENDED = [
     ("scripts/validate_registry.py", False),
     ("scripts/check_frozen.py", False),
     ("scripts/capture_environment.py", False),
+    ("scripts/check_placeholders.py", False),
 ]
 
 

@@ -104,7 +104,7 @@ Claude inspects the repository, asks the configuration questions from
 - `experiments/` (registry.json + registry.html + the shared `research.css`/`research.js`),
   `notebook/NOTEBOOK.html`, `decisions/answers.md`, and the project map.
 - Cross-platform validation scripts (`validate_registry.py`, `check_frozen.py`,
-  `capture_environment.py`, `validate_structure.py`).
+  `capture_environment.py`, `validate_structure.py`, `check_placeholders.py`).
 
 **Optional — only with your explicit selection:**
 
@@ -123,12 +123,15 @@ itself — the default install is fully local.
 Mirroring the SDD kit's two-tier model:
 
 - **Styled, self-contained HTML** for durable human-facing artifacts — the
-  experiment cards, the registry dashboard, the lab notebook, analysis reports —
-  sharing one design system (`research.css` + `research.js`). Open any in a browser.
+  experiment cards, the registry dashboard, the lab notebook, analysis reports,
+  infra-specs, and any other spec/design/proposal a human is meant to read (the
+  generic `doc.html` template) — sharing one design system (`research.css` +
+  `research.js`). **Every document a human reads is styled HTML, never plain
+  Markdown.** Open any in a browser.
 - **Machine state** in `experiments/registry.json` — the validation source of
   truth, kept separate from the HTML so `validate_registry.py` stays robust.
-- **Markdown** for Claude-facing operational files (`CLAUDE.md`, skills, agents,
-  policies, project map, decisions); **text** for configs and launchers.
+- **Markdown** for Claude-facing operational files only (`CLAUDE.md`, skills,
+  agents, policies, project map, decisions); **text** for configs and launchers.
 
 A fully rendered reference example lives under `experiments/E001_example-baseline/`
 (open `card.html`) — it is a reference for humans and agents, not installed into

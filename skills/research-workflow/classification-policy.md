@@ -12,9 +12,9 @@ Code whose job is to be correct, not to test a hypothesis: data pipelines,
 loaders, evaluation harnesses, metric implementations, plotting libraries,
 training-loop scaffolding, cluster glue.
 
-- Path: write an `infra-spec` (`templates/infra-spec.md.template`) — purpose,
-  interface/contract, acceptance tests, out-of-scope — **before** code; tests
-  must pass before `done`. Ordinary software discipline.
+- Path: write an `infra-spec` (`templates/infra-spec.html.template`, styled HTML)
+  — purpose, interface/contract, acceptance tests, out-of-scope — **before** code;
+  tests must pass before `done`. Ordinary software discipline.
 - Signal: "does it work / is it correct?" is the question, not "is the hypothesis
   true?".
 

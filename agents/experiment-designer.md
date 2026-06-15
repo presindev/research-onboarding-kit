@@ -18,7 +18,8 @@ card if any, `templates/experiment-card.html.template`, and
 
 1. Classify-check: confirm this is an experiment, not infrastructure or analysis
    (`classification-policy.md`). If it's infrastructure, recommend the
-   `infra-spec` path instead and stop.
+   `infra-spec` path instead (styled HTML, `templates/infra-spec.html.template`)
+   and stop.
 2. Create the experiment folder `experiments/<ID>/`, copy the card template to
    `card.html`, and fill it: hypothesis, the **single** change under test,
    baseline, setup, metrics + gate criteria, compute budget, artifacts to produce.

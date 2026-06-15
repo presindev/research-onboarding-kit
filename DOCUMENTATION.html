@@ -96,7 +96,7 @@
         <table>
           <thead><tr><th>Type</th><th>Path</th><th>Artifact</th></tr></thead>
           <tbody>
-            <tr><td>Infrastructure</td><td>mini-SDD: contract + tests before code</td><td><code>infra-spec.md</code></td></tr>
+            <tr><td>Infrastructure</td><td>mini-SDD: contract + tests before code</td><td><code>infra-spec.html</code></td></tr>
             <tr><td>Experiment</td><td>the card loop, two ⛔ gates</td><td><code>card.html</code></td></tr>
             <tr><td>Analysis / writing</td><td>cited report (not gated on the loop)</td><td><code>analysis-report.html</code></td></tr>
           </tbody>
@@ -255,19 +255,24 @@
 
       <section id="templates">
         <h2>24. Templates &amp; generated artifacts</h2>
-        <p>HTML templates (cards, registry, notebook, analysis report) share
-           <code>research.css</code>/<code>research.js</code> and carry <code>{{PLACEHOLDER}}</code>
-           tokens instantiated per experiment. Markdown templates: <code>CLAUDE.md</code>,
-           <code>PLAN.md</code>, project map, infra-spec, decisions. Text: config, launcher. The
-           design system makes the policies visible where work happens.</p>
+        <p>HTML templates (cards, registry, notebook, analysis report, infra-spec, and the
+           generic <code>doc.html.template</code> for any other human-facing spec/design doc)
+           share <code>research.css</code>/<code>research.js</code> and carry
+           <code>{{PLACEHOLDER}}</code> tokens instantiated per artifact.
+           <strong>Every document a human is meant to read is styled HTML</strong>, never plain
+           Markdown. Markdown templates are only the Claude-facing operational files:
+           <code>CLAUDE.md</code>, <code>PLAN.md</code>, project map, decisions. Text: config,
+           launcher. The design system makes the policies visible where work happens.</p>
       </section>
 
       <section id="scripts">
         <h2>25. Scripts</h2>
         <p>Cross-platform Python (POSIX + Windows): <code>validate_registry.py</code>,
            <code>check_frozen.py</code>, <code>capture_environment.py</code>,
-           <code>validate_structure.py</code>. Standard library only; <code>capture_environment</code>
-           excludes env vars so no secrets are captured.</p>
+           <code>validate_structure.py</code>, <code>check_placeholders.py</code>
+           (flags only real unresolved tokens — it skips the per-artifact templates that
+           keep theirs, so the end-of-install check stays clean). Standard library only;
+           <code>capture_environment</code> excludes env vars so no secrets are captured.</p>
       </section>
 
       <section id="file-reference">

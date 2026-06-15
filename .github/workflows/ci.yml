@@ -42,13 +42,14 @@ jobs:
 
       - name: No stale Markdown references to HTML artifacts
         run: |
-          # The central human-facing artifacts are styled HTML (card.html,
-          # registry.html, NOTEBOOK.html, analysis-report.html). Their .md
-          # names must not reappear anywhere in the kit. (project-map.md and
-          # infra-spec.md are intentionally Markdown and are NOT guarded.)
+          # The human-facing artifacts are styled HTML (card.html, registry.html,
+          # NOTEBOOK.html, analysis-report.html, infra-spec.html). Their .md names
+          # must not reappear anywhere in the kit. (project-map.md is intentionally
+          # Markdown — a Claude-facing operational file — and is NOT guarded.)
           if grep -rn \
             -e 'experiment-card\.md\b' -e 'analysis-report\.md\b' \
             -e 'NOTEBOOK\.md\b' -e 'registry\.md\b' -e 'card\.md\b' \
+            -e 'infra-spec\.md\b' \
             --include='*.md' --include='*.sh' --include='*.py' \
             --include='*.template' --include='*.html' --include='*.json' .; then
             echo "::error::Stale .md reference found (these artifacts are HTML now)."

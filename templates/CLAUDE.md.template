@@ -27,6 +27,7 @@ This project uses **Research Driven Development (RDD)**. The central unit is the
 ## Working style
 
 - **Classify first:** infrastructure (mini-SDD: contract + tests before code) / experiment (the card loop) / analysis-writing (cited report).
+- **Human-facing docs are styled HTML, never plain Markdown.** Cards, registry, notebook, analysis reports, infra-specs, and any other spec/design/proposal use the `research.css`/`research.js` design system (templates in `.claude/skills/research-workflow/templates/`; generic `doc.html.template` for anything else). Copy `research.css`/`research.js` next to a new artifact so it renders. Only operational files (`CLAUDE.md`, skills, agents, project map, decisions) stay Markdown.
 - Smoke test before any cluster submission; runs are resumable by design.
 - Claims trace to artifacts — every number cites a card or dataset ID.
 
