@@ -32,6 +32,7 @@ REQUIRED = [
 
 # Recommended but not fatal.
 RECOMMENDED = [
+    ("PLAN.html", False),
     ("experiments/research.css", False),
     ("experiments/research.js", False),
     ("experiments/registry.html", False),

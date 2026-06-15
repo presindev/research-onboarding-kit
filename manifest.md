@@ -77,6 +77,7 @@
 - `skills/research-workflow/skeptic-checklist.md`
 - `skills/research-workflow/workflow.md`
 - `templates/CLAUDE.md.template`
+- `templates/PLAN.html.template`
 - `templates/PLAN.md.template`
 - `templates/analysis-report.html.template`
 - `templates/assets/research.css`

@@ -5,6 +5,9 @@ the experiment matrix. Cards reference this plan; a card that doesn't fit the pl
 is a plan-change proposal, not a card. Plan changes are human decisions
 (`reference/human-in-the-loop-policy.md`).*
 
+*This file is canonical (Claude reads and edits it). Its human-facing twin is
+`PLAN.html` — keep the two in sync, the same way `README.md`/`README.html` are.*
+
 ## 1. Objectives
 
 Numbered, owner-confirmed goals.

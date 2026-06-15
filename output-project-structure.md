@@ -6,7 +6,8 @@ pieces (decision logs, optional packs, hooks) appear only when selected.
 ```text
 target-project/
 ├── CLAUDE.md                         # concise, project-specific; links out
-├── PLAN.md                           # objectives, phases, gates, experiment matrix
+├── PLAN.md                           # objectives, phases, gates, experiment matrix (canonical, Claude-facing)
+├── PLAN.html                         # human-facing twin of PLAN.md (styled; links experiments/research.css)
 ├── decisions/
 │   ├── answers.md                    # recorded onboarding answers
 │   ├── architecture-decisions.md     # (if decision-log pack selected)
@@ -59,7 +60,9 @@ target-project/
 - **Machine state**: `experiments/registry.json` is authoritative for status;
   `validate_registry.py` checks it against the cards and `results/`.
 - **Markdown** (Claude-facing operational files only): `CLAUDE.md`, `PLAN.md`,
-  skills, agents, decisions, project map.
+  skills, agents, decisions, project map. `PLAN.md` is canonical (Claude edits it)
+  but also ships a human-facing styled twin, `PLAN.html` — keep the two in sync,
+  exactly like the `README.md`/`README.html` pair.
 - **Text**: `configs/*.yaml`, `launchers/*.sh`.
 
 ## Not installed into the target project

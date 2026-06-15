@@ -62,7 +62,12 @@ Create or update, in this order:
    `TODO: ask the researcher`; never record secrets.
 3. `PLAN.md` (from `templates/PLAN.md.template`) — or adopt and link an existing
    plan. Offer to draft it from the interview if none exists. Undefined
-   evaluation gates become explicit TODO gates.
+   evaluation gates become explicit TODO gates. Also create its human-facing twin
+   `PLAN.html` (from `templates/PLAN.html.template`) with the same content;
+   `PLAN.md` stays canonical (Claude edits it), `PLAN.html` is what a human opens.
+   Keep them in sync, like the `README.md`/`README.html` pair. `PLAN.html` links
+   the shared `research.css`/`research.js` copied into `experiments/` (step 4), so
+   create it after that copy exists — no separate asset copy at the project root.
 4. `experiments/registry.json` (from `templates/registry.json.template`) and
    `experiments/registry.html` (from `templates/registry.html.template`); copy
    `templates/assets/research.css` and `research.js` into `experiments/`.
