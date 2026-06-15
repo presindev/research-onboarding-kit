@@ -1,5 +1,8 @@
 # Experiment card format
 
+<!-- placeholder-check: ignore-file — this doc describes the card's template
+     tokens; the {{...}} below are the subject matter, not unresolved leftovers. -->
+
 How to fill `templates/experiment-card.html.template`. The card is the central
 artifact: heavier than a chat message, lighter than an SDD spec. Resist adding
 traceability matrices — card + registry + notebook are enough for a research

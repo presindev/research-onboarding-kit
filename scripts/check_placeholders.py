@@ -10,6 +10,10 @@ Deliberately ignored (these KEEP their tokens by design):
   * any *.template file (kit templates are not final artifacts);
   * the per-artifact templates copied under .claude/<...>/templates/ — they are
     instantiated per experiment/spec, not during onboarding;
+  * any file carrying the opt-out marker `placeholder-check: ignore-file`
+    (typically in an HTML comment) — for docs that *describe* the token syntax,
+    e.g. a skill's "how to fill the template" reference, where the tokens are the
+    subject matter, not unresolved leftovers;
   * VCS / cache / environment dirs (.git, __pycache__, node_modules, venvs).
 
 Cross-platform: standard library only.
@@ -29,6 +33,11 @@ from pathlib import Path
 # A placeholder token is two braces, an UPPER_SNAKE name, two braces — the kit
 # convention. Built from escaped pieces so this source file is not itself flagged.
 TOKEN = re.compile(r"\{\{\s*[A-Z0-9_]+\s*\}\}")
+
+# A file carrying this marker keeps its tokens by design (it documents the token
+# syntax rather than instantiating it). Matched anywhere in the file, so it works
+# in an HTML comment, a code fence, YAML frontmatter, etc.
+IGNORE_MARKER = re.compile(r"placeholder-check:\s*ignore-file", re.IGNORECASE)
 
 # Only text files worth scanning.
 TEXT_SUFFIXES = {
@@ -70,6 +79,8 @@ def scan(root: Path) -> list[tuple[str, int, str]]:
             text = path.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError):
             continue
+        if IGNORE_MARKER.search(text):
+            continue
         for lineno, line in enumerate(text.splitlines(), start=1):
             for m in TOKEN.finditer(line):
                 offenders.append((rel.as_posix(), lineno, m.group(0)))
@@ -88,7 +99,9 @@ def main() -> int:
         for rel, lineno, tok in offenders:
             print(f"  - {rel}:{lineno}: {tok}")
         print("\nResolve these, or -- if a file is meant to keep its tokens -- move it "
-              "under a .claude/.../templates/ directory or give it a .template suffix.")
+              "under a .claude/.../templates/ directory, give it a .template suffix, "
+              "or add the marker `placeholder-check: ignore-file` (e.g. in an HTML "
+              "comment) if the file documents the token syntax.")
         return 1
 
     print("placeholder check OK -- no unresolved tokens in final files "
