@@ -17,6 +17,11 @@ invoked, which keeps them cheap (`reference/context-economy.md`).
 `cluster-ops` is **generated** project-specific (real scheduler commands), not
 copied verbatim — unknown values become TODOs, never invented.
 
+`paper-draft` also installs the `paper/` LaTeX scaffold (copy `templates/paper/`
+to the project root, instantiating the `.template` files); set the title, authors,
+and venue in `main.tex`. The section files stay near-empty until the workflow
+reaches the milestone that fills each (see the pack and `paper/README.md`).
+
 ## Available packs
 
 | Skill | Purpose | Recommended when |
@@ -26,6 +31,7 @@ copied verbatim — unknown values become TODOs, never invented.
 | `cluster-ops` | The project's real scheduler recipe + hand-over format | Cluster compute |
 | `literature-watch` | Periodic novelty / related-work sweep procedure | Paper target |
 | `paper-trail` | Claim→card→artifact table, figure provenance, reproducibility statement | Write-up phase |
+| `paper-draft` | Progressive LaTeX write-up in `paper/` — sections drafted as the research advances | Paper target |
 | `data-provenance` | Dataset cards (origin, license, hashes, sensitivity); update procedure | Licensed/sensitive data |
 | `decision-log` | Record durable methodological/workflow decisions | Team (always) |
 | `failure-learning` | Turn real mistakes into reusable lessons (proposed, never auto-written) | Recommended |

@@ -108,10 +108,10 @@ Claude inspects the repository, asks the configuration questions from
 
 **Optional — only with your explicit selection:**
 
-- Any of the ten skill packs (`questions.md` §16): `experiment-registry`,
+- Any of the eleven skill packs (`questions.md` §16): `experiment-registry`,
   `reproducibility-audit`, `cluster-ops`, `literature-watch`, `paper-trail`,
-  `data-provenance`, `decision-log`, `failure-learning`, `git-discipline`,
-  `figure-style`.
+  `paper-draft`, `data-provenance`, `decision-log`, `failure-learning`,
+  `git-discipline`, `figure-style`.
 - Hooks — shipped as examples, never enabled without approval.
 - MCPs — none configured by default (paper-search/tracker MCPs only on opt-in).
 

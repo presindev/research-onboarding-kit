@@ -67,6 +67,7 @@
 - `skills/optional/figure-style/SKILL.md`
 - `skills/optional/git-discipline/SKILL.md`
 - `skills/optional/literature-watch/SKILL.md`
+- `skills/optional/paper-draft/SKILL.md`
 - `skills/optional/paper-trail/SKILL.md`
 - `skills/optional/reproducibility-audit/SKILL.md`
 - `skills/research-workflow/SKILL.md`
@@ -93,6 +94,17 @@
 - `templates/launcher.sh.template`
 - `templates/memory/failure-learning-entry.md`
 - `templates/notebook/NOTEBOOK.html.template`
+- `templates/paper/README.md`
+- `templates/paper/main.tex.template`
+- `templates/paper/references.bib.template`
+- `templates/paper/sections/abstract.tex.template`
+- `templates/paper/sections/conclusion.tex.template`
+- `templates/paper/sections/discussion.tex.template`
+- `templates/paper/sections/experiments.tex.template`
+- `templates/paper/sections/introduction.tex.template`
+- `templates/paper/sections/methodology.tex.template`
+- `templates/paper/sections/related-work.tex.template`
+- `templates/paper/sections/results.tex.template`
 - `templates/project-map.md.template`
 - `templates/registry.html.template`
 - `templates/registry.json.template`

@@ -1,0 +1,7 @@
+% RESULTS — aggregate view across experiments; drafted once enough experiments are
+% confirmed to tell a coherent story, refined as more land. Tables/figures here are
+% regenerable (figure-style pack) and every cell traces to a card (paper-trail).
+% No number appears here that is not in a confirmed card / results dir.
+\section{Results}
+% TODO(paper): aggregate the confirmed experiment outcomes; cite cards for each
+% number. Figures via \includegraphics from figures/ (figure-style).

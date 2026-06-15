@@ -1,0 +1,15 @@
+% Bibliography for {{PROJECT_NAME}}.
+%
+% The `literature-scout` agent adds entries here during related-work / novelty
+% sweeps; the `paper-trail` pack verifies each citation says what it is cited for.
+% Keep keys stable once cited in a section (e.g. firstauthorYEARkeyword).
+%
+% Example entry (delete once real ones exist):
+% @article{smith2023example,
+%   title   = {An example reference},
+%   author  = {Smith, Jane and Doe, John},
+%   journal = {Journal of Examples},
+%   year    = {2023},
+%   volume  = {1},
+%   pages   = {1--10},
+% }

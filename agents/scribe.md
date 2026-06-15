@@ -29,6 +29,14 @@ Read: `experiments/registry.json`, the cards, `notebook/NOTEBOOK.html`,
 4. **Reconcile after resume** — for `launched` cards, check whether `results/`
    now has outputs (or a failure); update status to match reality. Artifacts win
    (`reference/session-recovery.md`).
+5. **Paper drafting** (only if the `paper-draft` pack is installed) — keep the
+   `paper/` LaTeX write-up current: after a **confirmed** verdict, append an
+   experiment subsection to `paper/sections/experiments.tex` (single change under
+   test + result, numbers only from `results/<ID>/`, citing the card); draft
+   intro/related-work from the literature review, methodology once `PLAN.md` fixes
+   the gates, and `results.tex` as confirmed experiments accumulate. Follow the
+   `paper-draft` skill; every number traces to a card and the author commits each
+   claim — you draft, you do not assert the science.
 
 ## What you never do
 

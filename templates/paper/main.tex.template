@@ -1,0 +1,49 @@
+% {{PROJECT_NAME}} — paper sources (LaTeX).
+%
+% The compiled PDF is the human-facing artifact; these .tex files are its source.
+% The harness drafts sections PROGRESSIVELY as the research advances — see
+% paper/README.md for the protocol and which workflow step writes which section.
+%
+% Two rules travel with every number written here:
+%   * Numbers come ONLY from real experiment results and cite their card ID
+%     (reference/research-integrity-policy.md; the `paper-trail` pack builds the
+%     claim -> card -> artifact table). Never write an "expected" or placeholder
+%     result.
+%   * Claude drafts; the author commits every scientific claim
+%     (reference/human-in-the-loop-policy.md).
+%
+% Match \documentclass, the bibliography package, and figure format to the target
+% venue ({{VENUE}}); swap natbib for biblatex / a venue style file as needed.
+
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{natbib}
+
+\graphicspath{{figures/}}   % figure-style pack writes regenerable figures here
+
+\title{{{PAPER_TITLE}}}
+\author{{{AUTHORS}}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related-work}
+\input{sections/methodology}
+\input{sections/experiments}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,7 @@
+% METHODOLOGY — drafted after the methodology/plan is set (PLAN.md phases & gates).
+% Describe data, model/approach, evaluation metrics, and the gate criteria — these
+% mirror PLAN.md and the cards' declared metrics, so they stay consistent. Describe
+% the protocol, not yet the outcomes.
+\section{Methodology}
+% TODO(paper): drafted once the methodology is fixed in PLAN.md; mirror the
+% evaluation metrics and gate criteria declared there.

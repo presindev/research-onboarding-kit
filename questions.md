@@ -88,7 +88,7 @@ optional_packs: recommend_per_answers                  # see §F16
 16. Which optional packs to install (see `skills/optional/README.md`)? Recommend
     defaults based on answers:
     - cluster → `cluster-ops`;
-    - paper target → `paper-trail` + `literature-watch`;
+    - paper target → `paper-draft` + `paper-trail` + `literature-watch`;
     - team → `decision-log` (recommended always);
     - data with licenses/sensitivity → `data-provenance`;
     - before-submission → `reproducibility-audit`;

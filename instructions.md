@@ -83,7 +83,12 @@ Create or update, in this order:
 8. Selected optional packs: copy `skills/optional/<name>/` to
    `.claude/skills/<name>/`, adapting placeholders. `cluster-ops` is **generated**
    project-specific (real scheduler commands), not copied verbatim — unknowns are
-   TODOs.
+   TODOs. If `paper-draft` is selected, also create the `paper/` LaTeX scaffold:
+   copy `templates/paper/` to the project root, instantiating the `.template`
+   files (set title/authors/venue in `main.tex`). Leave the `sections/*.tex` near
+   empty — the workflow fills each at its milestone (lit review → intro/related
+   work; methodology fixed → methodology; each confirmed verdict → an experiment
+   subsection).
 9. Agents: copy `agents/*.md` to `.claude/agents/`.
 10. Hooks: only if approved — copy chosen scripts to `.claude/hooks/` and add the
     entries from `hooks/settings-snippets.md` to `.claude/settings.json`. Confirm

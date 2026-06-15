@@ -1,0 +1,18 @@
+% EXPERIMENTS — grows one subsection per experiment, APPENDED after that
+% experiment's verdict is CONFIRMED (workflow.md step 7-8), never before.
+%
+% Protocol for each new subsection (copy the block below):
+%   * Title it by what the experiment tests; reference its card ID in a comment.
+%   * Setup: the single change under test vs. baseline (from the card).
+%   * Result: numbers taken ONLY from results/<ID>/ — never "expected" values.
+%     Tie each number to its card ID so paper-trail can trace it.
+%   * Report negative / inconclusive results with the same discipline as wins.
+\section{Experiments}
+% TODO(paper): append one \subsection per confirmed experiment.
+
+% --- template subsection (duplicate per experiment) ---------------------------
+% \subsection{<what this experiment tests>}   % card: E<seq>_<slug>
+% \label{exp:E<seq>_<slug>}
+% Setup: <the single change vs. baseline, from the card>.
+% Result: <number from results/E<seq>_<slug>/, citing the card>.
+% ------------------------------------------------------------------------------

@@ -87,6 +87,20 @@ passed on its own.
 - Update the registry row (status, gate_result, actual_cost).
 - A card is not `done` while its artifacts (plots, metrics files) are missing or
   its registry row is stale.
+- If the `paper-draft` pack is installed, **append an experiment subsection** to
+  `paper/sections/experiments.tex` for the just-confirmed verdict — the single
+  change under test and the result, numbers taken only from `results/<ID>/` and
+  citing the card. Negative/inconclusive results are written too.
+
+## Paper write-up (if the `paper-draft` pack is installed)
+
+The paper in `paper/` grows with the work, not at the end (see the `paper-draft`
+skill). Beyond the per-experiment subsection above: draft the introduction and
+related-work after the literature review (with the references the `literature-scout`
+found), the methodology once `PLAN.md` fixes the metrics and gates, and aggregate
+`results.tex` as confirmed experiments accumulate. Every number cites a confirmed
+card (`paper-trail`); the author commits each claim
+(`reference/human-in-the-loop-policy.md`).
 
 ## Iteration rule
 

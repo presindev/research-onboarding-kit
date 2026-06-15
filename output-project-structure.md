@@ -26,6 +26,10 @@ target-project/
 ├── notebook/
 │   ├── research.css  research.js
 │   └── NOTEBOOK.html                 # reverse-chronological lab notebook
+├── paper/                            # (if paper-draft pack selected) progressive LaTeX write-up
+│   ├── main.tex                      # entry point; \input{}s the sections
+│   ├── references.bib                # citations (literature-scout adds; paper-trail verifies)
+│   └── sections/                     # one file per section; filled as the research advances
 ├── configs/    E001_<slug>.yaml      # one config = one card
 ├── launchers/  E001_<slug>.sh        # carries ID, output dir, resume, scheduler block
 ├── results/    E001_<slug>/          # real run outputs (cards reconcile against these)
@@ -64,6 +68,10 @@ target-project/
   but also ships a human-facing styled twin, `PLAN.html` — keep the two in sync,
   exactly like the `README.md`/`README.html` pair.
 - **Text**: `configs/*.yaml`, `launchers/*.sh`.
+- **LaTeX** (paper sources, only with the `paper-draft` pack): `paper/*.tex` +
+  `references.bib`. The compiled PDF is the human-facing output, so the paper is
+  authored in LaTeX rather than the HTML design system; the harness drafts these
+  progressively and every reported number still traces to a card.
 
 ## Not installed into the target project
 
